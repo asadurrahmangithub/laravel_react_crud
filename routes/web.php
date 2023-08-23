@@ -16,3 +16,11 @@ Route::get('/students', function () {
 Route::get('/student/create', function () {
     return Inertia::render('Master');
 });
+
+Route::get('/product/create', function () {
+    return Inertia::render('Master');
+});
+
+Route::get('/product/manage', function () {
+    return Inertia::render('Master');
+});

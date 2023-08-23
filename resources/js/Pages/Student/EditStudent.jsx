@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams,useNavigate } from 'react-router-dom';
 
 const EditStudent = () => {
+    
     let { id } = useParams();
 
     const navigate = useNavigate();

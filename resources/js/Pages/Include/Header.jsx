@@ -22,13 +22,17 @@ const Header = () => {
                                 <Link className="nav-link" to="/student/create">Add Student</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" aria-disabled="true">Disabled</a>
+                                <Link to="/product/create" className="nav-link" aria-disabled="true">Add Product</Link>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link to="/product/manage" className="nav-link" aria-disabled="true">Manage Product</Link>
                             </li>
                         </ul>
-                        <form className="d-flex ps-5" role="search">
+                        {/* <form className="d-flex ps-5" role="search">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                                 <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        </form> */}
                     </div>
                 </div>
             </nav>

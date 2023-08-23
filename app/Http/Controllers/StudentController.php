@@ -72,10 +72,18 @@ class StudentController extends Controller
 
     public function edit(string $id){
         $student = Student::findOrfail($id);
-        return response()->json([
-            'status' => 200,
-            'student' => $student
-        ],200);
+        if($student !== NULL){
+            return response()->json([
+                'status' => 200,
+                'student' => $student
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'error' => '404 Not Found!'
+            ],404);
+        }
+
     }
 
     /**
