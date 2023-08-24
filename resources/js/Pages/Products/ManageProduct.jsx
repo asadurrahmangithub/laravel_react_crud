@@ -14,11 +14,11 @@ const ManageProduct = () => {
         })
     }, []);
 
-    const deleteStudent = (e, id) => {
+    const deleteProduct = (e, id) => {
         e.preventDefault();
         const thisClicked = e.currentTarget;
         thisClicked.innetText = "Deleting...";
-        axios.delete(`/api/students/${id}`)
+        axios.delete(`/api/products/${id}`)
             .then(response => {
 
                 alert(response.data.message);
@@ -49,8 +49,8 @@ const ManageProduct = () => {
         );
     }
 
-    var studentDetails = "";
-    studentDetails = products.map((item, index) => {
+    var productDetails = "";
+    productDetails = products.map((item, index) => {
         return (
             <tr key={index}>
 
@@ -63,8 +63,8 @@ const ManageProduct = () => {
                     <img src={`http://127.0.0.1:8000/${item.image}`} alt="" style={{ height: "50px", width: "50px" }}/>
                 </td>
                 <td>
-                    <Link to="" className="btn btn-warning mx-2">Edit</Link>
-                    <button type='button' onClick={(e) => deleteStudent(e, item.id)} className="btn btn-danger mx-2">Delete</button>
+                    <Link to={`/api/products/${item.id}/edit`} className="btn btn-warning mx-2">Edit</Link>
+                    <button type='button' onClick={(e) => deleteProduct(e, item.id)} className="btn btn-danger mx-2">Delete</button>
                 </td>
             </tr>
 
@@ -76,8 +76,8 @@ const ManageProduct = () => {
                 <div className="col-md-12 mx-auto">
                     <div className="card">
                         <div className="card-header">
-                            <h3 className='align-center'>All Product Data
-                                <Link to="/product/create" className="btn btn-danger float-end">Add Product</Link>
+                            <h3 className='text-success text-center'>All Product Data
+                                <Link to="/product/create" className="btn btn-primary float-end">Add Product</Link>
                             </h3>
 
                         </div>
@@ -95,7 +95,7 @@ const ManageProduct = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {studentDetails}
+                                    {productDetails}
                                 </tbody>
                             </table>
                         </div>

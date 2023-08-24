@@ -112,7 +112,20 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrfail($id);
+
+        if($product){
+            return response()->json([
+                'status' => 200,
+                'product' => $product
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'errors' => 'Product Data Not Found!'
+            ],404);
+        }
+
     }
 
     /**
@@ -120,7 +133,35 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if($product){
+            $product->product_name = $request->input('product_name');
+            $product->category = $request->input('category');
+            $product->product_code = $request->input('product_code');
+            $product->product_price = $request->input('product_price');
+            $product->description = $request->input('description');
+
+            if ($request->file('image')) {
+                if (file_exists($product->image)) {
+                    unlink($product->image);
+                }
+                $product->image = $this->image($request);
+            }
+            $product->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Update'
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'errors' => 'Something Went Wrong'
+            ],404);
+
+        }
+
     }
 
     /**
@@ -128,6 +169,23 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if($product){
+            if (file_exists($product->image)) {
+                unlink($product->image);
+            }
+            $product->delete();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Product Data Delete'
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'errors' => 'Something Went Wrong!'
+            ],404);
+        }
     }
 }
